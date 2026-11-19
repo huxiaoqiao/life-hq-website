@@ -93,6 +93,7 @@ section{scroll-margin-top:calc(var(--nav-h) + 20px);position:relative}
 .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 14px 40px rgba(124,58,237,.55)}
 .btn-ghost{background:rgba(238,240,255,.04);color:var(--ice);border:1px solid rgba(238,240,255,.35)}
 .btn-ghost:hover{border-color:var(--lav);background:rgba(139,92,246,.14);transform:translateY(-2px)}
+.btn:focus-visible,.qa-h:focus-visible,.shot:focus-visible,a:focus-visible{outline:2px solid var(--lav);outline-offset:3px}
 .btn-sm{padding:10px 24px;font-size:14px}
 .pill{display:inline-flex;align-items:center;gap:9px;padding:8px 20px;border-radius:999px;
   border:1px solid var(--line-strong);background:rgba(79,70,229,.14);color:var(--lav);
@@ -127,6 +128,24 @@ h2.h-serif:not(.cta-title),.fcopy h3{transform:skewX(-9deg)}
 .hero .wrap{padding-bottom:0}
 .hero-sub{max-width:640px;margin:20px auto 0;color:var(--muted);font-size:clamp(15px,1.8vw,19px)}
 .hero-cta{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.dl-wrap{position:relative;display:inline-flex}
+.dl-pop{position:absolute;top:calc(100% + 12px);left:50%;translate:-50% 8px;z-index:70;display:flex;align-items:center;gap:16px;
+  width:368px;padding:14px 20px 14px 14px;background:#e9f9ef;border:1px solid #d2eede;border-radius:14px;
+  box-shadow:0 22px 60px rgba(3,8,18,.5);opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .22s ease,translate .22s ease,visibility .22s}
+.dl-wrap.open .dl-pop{opacity:1;visibility:visible;translate:-50% 0;pointer-events:auto}
+.dl-wrap.above .dl-pop{top:auto;bottom:calc(100% + 12px);translate:-50% -8px}
+.dl-wrap.above.open .dl-pop{translate:-50% 0}
+.dl-wrap.above .dl-pop::before{top:auto;bottom:-6.5px;transform:rotate(225deg)}
+.dl-pop::before{content:"";position:absolute;top:-6.5px;left:50%;translate:-50% 0;width:12px;height:12px;background:#e9f9ef;
+  border-left:1px solid #d2eede;border-top:1px solid #d2eede;transform:rotate(45deg)}
+.dl-qr{flex:0 0 auto;background:#fff;border-radius:10px;padding:8px;box-shadow:0 2px 12px rgba(28,64,46,.14)}
+.dl-qr img{display:block;width:148px;height:148px}
+.dl-txt{display:flex;flex-direction:column;gap:6px;min-width:0}
+.dl-txt strong{color:#20262e;font-size:16px;font-weight:700;letter-spacing:.02em}
+.dl-txt small{color:#7b8794;font-size:12.5px;line-height:1.65}
+@media (pointer:coarse){.dl-pop{display:none}}
+@media (max-width:420px){.dl-pop{width:320px}.dl-qr img{width:120px;height:120px}}
 .trust{display:flex;justify-content:center;align-items:center;gap:0;flex-wrap:wrap;margin:26px 0 0;color:var(--muted);font-size:15px}
 .trust span{display:inline-flex;align-items:center;gap:9px;padding:0 26px}
 .trust span + span{position:relative}
@@ -407,6 +426,13 @@ footer{border-top:1px solid var(--line);background:rgba(5,6,18,.85);padding:56px
     <p class="hero-sub" data-reveal style="--d:.16s">Life HQ · 人生参谋部——早晨规划、白天记录、晚上复盘，装在你自己设备上的 AI 参谋。</p>
     <div class="hero-cta" data-reveal style="--d:.22s">
       <a class="btn btn-primary" href="#" data-link="win" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M6 11l6 6 6-6M4 21h16"/></svg>立即下载 Windows</a>
+      <span class="dl-wrap" id="apkWrap">
+        <a class="btn btn-ghost" href="#" data-link="apk" id="apkBtn" aria-haspopup="true" aria-expanded="false"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M11 18.5h2"/></svg>手机版下载</a>
+        <div class="dl-pop" id="apkPop" role="dialog" aria-label="扫码下载手机版">
+          <span class="dl-qr"><img src="assets/brand/apk-qr.svg" alt="手机版 APK 下载二维码" width="148" height="148"></span>
+          <span class="dl-txt"><strong>扫码下载手机版</strong><small>将手机摄像头对准二维码，即可下载</small></span>
+        </div>
+      </span>
       <a class="btn btn-ghost" href="#" data-link="mac"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>Mac 下载</a>
     </div>
     <div class="trust" data-reveal style="--d:.28s">
@@ -726,7 +752,8 @@ footer{border-top:1px solid var(--line);background:rgba(5,6,18,.85);padding:56px
   var LINKS = {
     buy: "https://item.taobao.com/item.htm?ft=t&id=1096984688103",
     docs: "https://my.feishu.cn/docx/GErMd6azBoQ47FxKHCBcho1bnwd",
-    win: "https://ota.lifehq.vip/desktop/release/1.0.0/lifehq-desktop-1.0.0-x64-setup.exe",
+    win: "https://ota.lifehq.vip/prod/1.0.0/LifeHQ_1.0.0_x64-setup.exe",
+    apk: "https://ota.lifehq.vip/mobile/prod/1.0.0/LifeHQ-mobile_1.0.0-arm64.apk",
     mac: ""
   };
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -744,6 +771,7 @@ footer{border-top:1px solid var(--line);background:rgba(5,6,18,.85);padding:56px
       else { a.addEventListener("click", function(e){ e.preventDefault(); toast("Mac 版正在打包，完成后此处开放下载；可先用 Windows 版"); }); }
       return;
     }
+    if (k === "apk") { a.href = LINKS.apk; return; }
     if (k === "docs") {
       if (LINKS.docs) { a.href = LINKS.docs; }
       else {
@@ -754,6 +782,37 @@ footer{border-top:1px solid var(--line);background:rgba(5,6,18,.85);padding:56px
       }
     }
   });
+
+  /* APK 二维码浮窗：桌面悬停/点击弹出，触屏设备按钮直链下载 */
+  var apkWrap = document.getElementById("apkWrap");
+  var apkBtn = document.getElementById("apkBtn");
+  var finePointer = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+  if (apkWrap && finePointer) {
+    var pinned = false, hideT = 0;
+    var setOpen = function(on){
+      apkWrap.classList.toggle("open", on);
+      apkBtn.setAttribute("aria-expanded", on ? "true" : "false");
+    };
+    var show = function(){
+      clearTimeout(hideT);
+      var r = apkBtn.getBoundingClientRect();
+      var ph = apkPop.offsetHeight || 194;
+      apkWrap.classList.toggle("above", r.bottom + 12 + ph > window.innerHeight - 8);
+      setOpen(true);
+    };
+    var hide = function(){ pinned = false; setOpen(false); };
+    var hideSoon = function(){ clearTimeout(hideT); hideT = setTimeout(function(){ if (!pinned) setOpen(false); }, 240); };
+    apkWrap.addEventListener("mouseenter", show);
+    apkWrap.addEventListener("mouseleave", hideSoon);
+    apkBtn.addEventListener("focus", show);
+    apkWrap.addEventListener("focusout", function(e){ if (!apkWrap.contains(e.relatedTarget)) hideSoon(); });
+    apkBtn.addEventListener("click", function(e){ e.preventDefault(); pinned = !pinned; setOpen(pinned); });
+    document.addEventListener("click", function(e){ if (!apkWrap.contains(e.target)) hide(); });
+    document.addEventListener("keydown", function(e){ if (e.key === "Escape") hide(); });
+    var reposition = function(){ if (apkWrap.classList.contains("open")) show(); };
+    window.addEventListener("scroll", reposition, { passive: true });
+    window.addEventListener("resize", reposition);
+  }
 
   /* stars */
   var stars = document.getElementById("stars");
