@@ -126,7 +126,7 @@ h2.h-serif:not(.cta-title),.fcopy h3{transform:skewX(-9deg)}
   border-radius:50%;border:1px solid rgba(139,92,246,.15);box-shadow:inset 0 0 90px rgba(139,92,246,.10);pointer-events:none;
   -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 76%);mask-image:linear-gradient(180deg,#000 0%,transparent 76%)}
 .hero .wrap{padding-bottom:0}
-.hero-sub{max-width:640px;margin:20px auto 0;color:var(--muted);font-size:clamp(15px,1.8vw,19px)}
+.hero-sub{margin:20px auto 0;color:var(--muted);font-size:clamp(15px,1.8vw,19px)}
 .hero-cta{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:30px}
 .dl-wrap{position:relative;display:inline-flex}
 .dl-pop{position:absolute;top:calc(100% + 12px);left:50%;translate:-50% 8px;z-index:70;display:flex;align-items:center;gap:16px;
@@ -360,11 +360,12 @@ footer{border-top:1px solid var(--line);background:rgba(5,6,18,.85);padding:56px
 .foot nav a:hover{color:var(--lav)}
 .foot .legal{color:var(--dim);font-size:13px;display:flex;flex-direction:column;gap:4px;align-items:flex-end;text-align:right}
 @media (max-width:940px){.foot{grid-template-columns:1fr;gap:22px;padding-bottom:76px}.foot nav{border:0;padding:0}.foot .legal{align-items:flex-start;text-align:left;flex-direction:row;flex-wrap:wrap;gap:18px}}
-.totop{position:fixed;right:26px;bottom:26px;z-index:60;width:60px;height:60px;border-radius:50%;
-  border:1px solid var(--line-strong);background:linear-gradient(135deg,rgba(79,70,229,.9),rgba(139,92,246,.9));color:#fff;font-size:16px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
-  box-shadow:0 8px 26px rgba(79,70,229,.5);opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .3s,transform .3s}
-.totop .tt{font-size:9px;font-weight:600;letter-spacing:.5px}
+.totop{position:fixed;right:26px;bottom:26px;z-index:60;width:52px;height:52px;border-radius:50%;
+  border:1.5px solid rgba(196,181,253,.6);background:linear-gradient(145deg,#977ef8,#7c5cf0 48%,#6a4fe0);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  box-shadow:0 6px 22px rgba(106,79,224,.5),inset 0 1px 8px rgba(255,255,255,.25);opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .3s,transform .3s}
+.totop svg{display:block}
+.totop .tt{font-size:8px;font-weight:600;letter-spacing:.4px;color:rgba(255,255,255,.92)}
 .totop.show{opacity:1;pointer-events:auto;transform:translateY(0)}
 .totop:hover{filter:brightness(1.15)}
 .toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,20px);z-index:95;opacity:0;pointer-events:none;
@@ -739,7 +740,7 @@ footer{border-top:1px solid var(--line);background:rgba(5,6,18,.85);padding:56px
   </div>
 </footer>
 
-<button class="totop" id="totop" aria-label="回到顶部">↑<span class="tt">回到顶部</span></button>
+<button class="totop" id="totop" aria-label="回到顶部"><svg width="16" height="9" viewBox="0 0 16 9" fill="none" aria-hidden="true"><path d="M2 7.5 8 2l6 5.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tt">回到顶部</span></button>
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="截图放大查看">
   <button class="close" id="lbClose" aria-label="关闭">×</button>
   <figure><img id="lbImg" alt="" /><figcaption id="lbCap"></figcaption></figure>
@@ -752,8 +753,8 @@ footer{border-top:1px solid var(--line);background:rgba(5,6,18,.85);padding:56px
   var LINKS = {
     buy: "https://item.taobao.com/item.htm?ft=t&id=1096984688103",
     docs: "https://my.feishu.cn/docx/GErMd6azBoQ47FxKHCBcho1bnwd",
-    win: "https://ota.lifehq.vip/desktop/prod/1.0.0/LifeHQ_1.0.0_x64-setup.exe",
-    apk: "https://ota.lifehq.vip/mobile/prod/1.0.0/LifeHQ-mobile_1.0.0-arm64.apk",
+    win: "https://ota.lifehq.vip/desktop/release/1.0.0/lifehq-desktop-1.0.0-x64-setup.exe",
+    apk: "https://ota.lifehq.vip/mobile/release/1.0.0/lifehq-mobile-1.0.0-release-arm64.apk",
     mac: ""
   };
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
